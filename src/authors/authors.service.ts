@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/authors.dto';
+import { CreateBookDto } from '../books/dto/books.dto';
 
 @Injectable()
 export class AuthorsService {
@@ -22,6 +23,11 @@ export class AuthorsService {
       throw new NotFoundException(`author with ID ${id} cannot be found`);
     }
     return author;
+  }
+
+  findBooks(id: number): CreateBookDto[] {
+    const author = this.getOne(id);
+    return author.books;
   }
 
   update(id: number, updateAuthor: CreateAuthorDto) {

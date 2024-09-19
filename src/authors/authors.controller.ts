@@ -28,11 +28,11 @@ export class AuthorsController {
     return this.authorsService.getOne(+id);
   }
 
-//   // --> /authors/<id>/books (GET)
-//   @Get(':id/books')
-//   findBooks(@Param('id') id: string) {
-//     return this.authorsService.findBooks(+id);
-//   }
+  // --> /authors/<id>/books (GET)
+  @Get(':id/books')
+  findBooks(@Param('id') id: string) {
+    return this.authorsService.findBooks(+id);
+  }
 
   // --> /authors/<id> (PUT--All properties update)
   @Put(':id')
