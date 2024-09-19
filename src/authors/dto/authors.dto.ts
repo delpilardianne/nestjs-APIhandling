@@ -7,10 +7,6 @@ export class CreateAuthorDto {
   readonly name: string;
 
   @IsString()
-  @Length(0, 100, { message: 'Country must not exceed 100 characters' })
-  readonly country: string;
-
-  @IsString()
   @Length(0, 200, { message: 'Bio must not exceed 200 characters' })
   readonly bio: string;
 }

@@ -7,15 +7,7 @@ export class CreateBookDto {
   readonly title: string;
 
   @IsString()
+  @IsNotEmpty()
   @Length( 1, 50, { message: 'Author must be between 1 and 50 characters' } )
   readonly author: string;
-
-  @IsString()
-  @Length(13, 13, { message: 'ISBN must be a valid 13-digit ISBN' } )
-  readonly isbn: string;
-
-  @IsInt()
-  @Min( 1000, { message: 'Published year must be a valid year' } )
-  @Max( new Date().getFullYear(), { message: 'Published year must be a valid year' } )
-  readonly publishedYear: number;
 }

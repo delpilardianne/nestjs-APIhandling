@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, UsePipes, ValidationPipe, UseFilters, ParseIntPipe, Patch } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/authors.dto';
 import { AuthorsService } from './authors.service';
-// import { UpdateAuthorDto } from './dto/updateauthors.dto';
 import { WsExceptionFilter } from '../common/filters/http-exception.filter';
 
 @Controller('authors')
@@ -10,7 +9,6 @@ export class AuthorsController {
   constructor(private readonly authorsService: AuthorsService) {}
 
   @Post()
-  @UsePipes(new ValidationPipe({transform: true, whitelist: true}))
   create(@Body() createAuthorDto: CreateAuthorDto) {
     const id = this.authorsService.create(createAuthorDto);
     return {id, message: 'Author has been successfully created'};
@@ -27,8 +25,8 @@ export class AuthorsController {
     return this.authorsService.findOne(authorId);
   }
 
+  //all resources update
   @Put(':id')
-  @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateAuthorData: CreateAuthorDto
@@ -36,8 +34,8 @@ export class AuthorsController {
     return this.authorsService.update(id, updateAuthorData);
   }
 
+  //partial update
   @Patch(':id')
-  @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
   partialUpdate(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateAuthorData: Partial<CreateAuthorDto>
