@@ -19,14 +19,14 @@ export class BooksService {
 	findOne(id: number): CreateBookDto {
 		const book = this.books.get(id);
 		if (!book) {
-			throw new NotFoundException(`Book with ID ${id} cannot be found`);
+			throw new NotFoundException(`book with ID ${id} cannot be found`);
 		}
 		return book;
 	}
 
     update(id: number, updateBookDto: CreateBookDto) {
         if (!this.books.has(id)) {
-          throw new NotFoundException(`Book with ID ${id} not found`);
+          throw new NotFoundException(`book with ID ${id} not found`);
         }
         const book = this.books.get(id);
         const updatedBook = { ...book, ...updateBookDto };
@@ -36,7 +36,7 @@ export class BooksService {
 
     partialUpdate(id: number, updateData: Partial<CreateBookDto>): CreateBookDto {
         if (!this.books.has(id)) {
-            throw new NotFoundException(`Book with ID ${id} not found`);
+            throw new NotFoundException(`book with ID ${id} not found`);
         }
         const book = this.findOne(id);
         const updatedBook = { ...book, ...updateData };

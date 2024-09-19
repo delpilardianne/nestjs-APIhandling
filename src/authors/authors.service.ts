@@ -12,21 +12,21 @@ export class AuthorsService {
     return id;
   }
 
-  findAll(): CreateAuthorDto[] {
+  getAll(): CreateAuthorDto[] {
     return Array.from(this.authors.values());
   }
 
-  findOne(id: number): CreateAuthorDto {
+  getOne(id: number): CreateAuthorDto {
     const author = this.authors.get(id);
     if (!author) {
-      throw new NotFoundException(`Author with ID ${id} cannot be found`);
+      throw new NotFoundException(`author with ID ${id} cannot be found`);
     }
     return author;
   }
 
   update(id: number, updateAuthor: CreateAuthorDto) {
     if (!this.authors.has(id)) {
-        throw new NotFoundException(`Author with ID ${id} not found`);
+        throw new NotFoundException(`author with ID ${id} not found`);
     }
     const author = this.authors.get(id);
       const updatedAuthor = { ...author, ...updateAuthor };
@@ -36,9 +36,9 @@ export class AuthorsService {
 
   partialUpdate(id: number, updateData: Partial<CreateAuthorDto>): CreateAuthorDto {
     if (!this.authors.has(id)) {
-        throw new NotFoundException(`Author with ID ${id} not found`);
+        throw new NotFoundException(`author with ID ${id} not found`);
     }
-    const author = this.findOne(id);
+    const author = this.getOne(id);
     const updatedAuthor = { ...author, ...updateData };
     this.authors.set(id, updatedAuthor);
     return updatedAuthor;
@@ -46,7 +46,7 @@ export class AuthorsService {
 
   remove(id: number): void {
     if (!this.authors.delete(id)) {
-      throw new NotFoundException(`Author with ID ${id} cannot be found`);
+      throw new NotFoundException(`author with ID ${id} cannot be found`);
     }
   }
 }

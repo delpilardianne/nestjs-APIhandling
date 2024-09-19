@@ -1,12 +1,13 @@
-import { IsString, IsNotEmpty, Length } from 'class-validator';
+import { IsString, IsNotEmpty, Length, IsArray, ValidateNested, IsOptional } from 'class-validator';
 
 export class CreateAuthorDto {
   @IsString()
   @IsNotEmpty()
-  @Length( 1, 50, { message: 'Name must be between 1 and 50 characters' } )
+  @Length(1, 50, { message: 'name must be between 1 and 50 characters' })
   readonly name: string;
 
   @IsString()
-  @Length(0, 200, { message: 'Bio must not exceed 200 characters' })
+  @Length(0, 200, { message: 'bio must not exceed 200 characters' })
   readonly bio: string;
+
 }
